@@ -3,30 +3,23 @@ package br.ce.barriga.steps;
 
 import br.ce.barriga.pages.BasePage;
 import br.ce.barriga.pages.ContaPage;
-import br.ce.barriga.pages.LoginPage;
 import io.cucumber.java.After;
 import io.cucumber.java.pt.E;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
-import org.junit.Assert;
-import org.junit.Before;
-import org.openqa.selenium.By;
 
-import static br.ce.barriga.driver.DriverFactore.getDriver;
 import static br.ce.barriga.driver.DriverFactore.killDriver;
-//import static br.ce.barriga.driver.DriverFactore.killDriver;
 
 
-public class contaStep {
+public class ContaStep {
 
-    private LoginPage login = new LoginPage(getDriver());
-    private BasePage page = new BasePage(getDriver());
-    private ContaPage conta = new ContaPage(getDriver());
+    ContaPage conta = new ContaPage();
 
     @Quando("seleciono Contas")
     public void selecionoContas() {
-        conta.clickConta();
+        conta.clickContas();
     }
+
     @E("seleciono Adicionar")
     public void selecionoAdicionar() {
         conta.clickAdicionar();
@@ -34,46 +27,36 @@ public class contaStep {
 
     @E("informo o nome {string}")
     public void informoONome(String arg0) {
-        conta.clearName();
-        conta.nomeConta(arg0);
+        conta.escreverConta(arg0);
     }
 
     @E("clico em salvar")
     public void clicoEmSalvar() {
-        page.setButton();
+        conta.clickButton();
     }
 
     @Então("recebo a mensagem {string}")
     public void receboAMensagem(String arg0) {
-        page.textpMsg(arg0);
+        conta.textpMsg(arg0);
     }
 
     @E("seleciono listar")
     public void selecionoListar() {
-        conta.clickConta();
-        conta.clikList();
+        conta.clickListar();
     }
 
-    @E("clico no icne de editar")
+    @E("clico no icone de editar")
     public void clicoNoIcneDeEditar() {
-        conta.editar();
+        conta.editConta();
     }
 
-
-    @E("clico no icne de excluir")
+    @E("clico no icone de excluir")
     public void clicoNoIcneDeExcluir() {
-        conta.excluir();
+        conta.deletConta();
     }
 
-    @Before
-    public void inicializa(){
-        getDriver().get("https://seubarriga.wcaquino.me/");
-        login.Logar("an@an", "123");
-    }
     @After
-    public void finaliza(){
+    public void fechar(){
         killDriver();
     }
-
-
 }

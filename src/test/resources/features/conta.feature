@@ -6,14 +6,16 @@
 
     Contexto: Mensagens Contas
       Dado que estou acessando a aplicação
-      Quando informo o usuário "an@an"
-      E a senha "123"
+      Quando informo o usuário
+      E a senha
       E seleciono entrar
       Então visualizo a página inicial "Bem vindo, angel!"
       Quando seleciono Contas
-      E seleciono Adicionar
 
+
+    @esquemaCenario
     Esquema do Cenario: Adicionar conta
+      E seleciono Adicionar
       E informo o nome "<conta>"
       E clico em salvar
       Então recebo a mensagem "<mensagem>"
@@ -23,14 +25,16 @@
         |      Conta nova        |   Já existe uma conta com esse nome!   |
         |                        |        Informe o nome da conta         |
 
+    @cenario1
     Cenário: Editar conta
         E seleciono listar
-        E clico no icne de editar
+        E clico no icone de editar
         E informo o nome "Conta Editada"
         E clico em salvar
         Então recebo a mensagem "Conta alterada com sucesso!"
 
+    @cenario
     Cenário: Excluir conta
         E seleciono listar
-        E clico no icne de excluir
+        E clico no icone de excluir
         Então recebo a mensagem "Conta removida com sucesso!"

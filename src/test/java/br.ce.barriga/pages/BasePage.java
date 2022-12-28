@@ -1,5 +1,6 @@
 package br.ce.barriga.pages;
 
+import br.ce.barriga.driver.DriverFactore;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,36 +8,48 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+import java.time.Duration;
+
+import static br.ce.barriga.driver.DriverFactore.getDriver;
+
 public class BasePage {
 
-    public BasePage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
+    public BasePage() {
+        PageFactory.initElements(DriverFactore.getDriver(), this);
     }
+
     @FindBy(how = How.TAG_NAME, using = "button")
-    private WebElement enter;
+    private WebElement button;
+
+    public void escrever(WebElement elemento, String text){
+        elemento.clear();
+        elemento.sendKeys(text);
+    }
+    public void click(WebElement elemento){
+        elemento.click();
+    }
+    public void clickButton(){
+        button.click();
+    }
+
+/******************************************************* Mensagens ****************************************************/
 
     @FindBy(how = How.XPATH, using = "//div[starts-with(@class, 'alert alert-')]")
     private WebElement msg;
-    @FindBy(how = How.ID, using = "nome")
-    private WebElement nome;
 
-    @FindBy(how = How.XPATH, using = "//div[@class = 'alert alert-danger']/ul")
-    private WebElement mesgErro;
-
-    public void setButton() {
-        enter.click();
-    }
-    public String setMsg() {
-        return msg.getText();
-    }
     public void textpMsg(String mens){
         String texto = msg.getText();
-        Assert.assertEquals(mens, texto);
+        Assert.assertEquals(texto, mens);
     }
-    public void nome(String conta){
-        nome.sendKeys(conta);
+
+    public String msg(WebElement element){
+       return element.getText();
     }
-    public String mensagemErro(){
-       return mesgErro.getText();
+
+    public void EsperaImplicita(){
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        System.out.println("Funcionei111");
+        System.out.println("Funcionei");
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 }
