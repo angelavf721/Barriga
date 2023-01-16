@@ -16,6 +16,10 @@ public class ContaPage extends BasePage{
     }
 
 
+    public int getRandomNumber(){
+        Random rand = new Random();
+        return rand.nextInt();
+    }
     @FindBy(linkText = "Contas")
     private WebElement contas;
 
@@ -28,10 +32,10 @@ public class ContaPage extends BasePage{
     @FindBy(how = How.ID, using = "nome")
     private WebElement nomeCont;
 
-    @FindBy(how = How.XPATH, using = "//*[.='Conta para alterar']//..//a/span[@class='glyphicon glyphicon-edit']")
+    @FindBy(how = How.XPATH, using = "//table[@id='tabelaContas']//td[contains(text(),'Conta para alterar')]//..//a/span[@class='glyphicon glyphicon-edit']")
     private WebElement editCont;
 
-    @FindBy(how = How.XPATH, using = "//*[.='Conta mesmo nome']//..//a/span[@class='glyphicon glyphicon-remove-circle']")
+    @FindBy(how = How.XPATH, using = "//table[@id='tabelaContas']//td[contains(text(),'Conta mesmo nome')]//..//a/span[@class='glyphicon glyphicon-remove-circle']")
     private WebElement delete;
 
     public void clickContas(){
@@ -44,8 +48,12 @@ public class ContaPage extends BasePage{
         click(listar);
     }
     public void escreverConta(String text){
+        escrever(nomeCont, text+getRandomNumber());
+    }
+    public void escreverC(String text){
         escrever(nomeCont, text);
     }
+
     public void editConta(){
         click(editCont);
     }

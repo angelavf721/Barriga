@@ -2,22 +2,18 @@ package br.ce.barriga.runners;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
-import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.time.Duration;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features/",
         glue = "br.ce.barriga.steps",
-        tags = "@cenario1",
+        tags = "@cenario",
         plugin = {"pretty", "html:target/report-html","json:target/report.json"},
         monochrome = true,
         snippets = CucumberOptions.SnippetType.CAMELCASE,
@@ -34,5 +30,4 @@ public class RunnerCenarios {
         driver.findElement(By.linkText("reset")).click();
         driver.quit();
     }
-
 }

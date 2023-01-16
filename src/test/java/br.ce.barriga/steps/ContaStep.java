@@ -55,8 +55,14 @@ public class ContaStep {
         conta.deletConta();
     }
 
+    @E("informo o conta {string}")
+    public void informoOConta(String arg0) {
+        conta.escreverC(arg0);
+    }
+
     @After
     public void fechar(){
         killDriver();
     }
+
 }
